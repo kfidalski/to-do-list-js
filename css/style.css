@@ -1,0 +1,35 @@
+body{
+
+  font-size: 14px;
+
+}
+
+
+#myList li{
+margin: 10px;
+width: 30%;
+position: relative;
+height: 30px;
+text-align: left;
+padding: 2px 2px 2px 2px;
+
+}
+
+.closeBtn{
+  right: 10px;
+  height: 100%;
+  width: 10%;
+  position: absolute;
+   top:0;
+   float: right;
+}
+
+.editBtn{
+  margin-left: 10px;
+  float: left;
+  right: 60px;
+  height: 100%;
+  width: 14%;
+  position: absolute;
+ top:0;
+}
