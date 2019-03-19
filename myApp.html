@@ -5,11 +5,7 @@
 <title>ToDo List</title>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <script src="js/script.js"></script>
-<style>
-.myClass{
-  font-size: 30px;
-}
-</style>
+
 </head>
 <body>
 
@@ -20,19 +16,22 @@
 <script>
   // Our header will be generater from JavaScript !
 
-  var header = document.createElement("h2");
-  var textNodeHeader = document.createTextNode("My ToDo List App");
-  header.appendChild(textNodeHeader);
+
+
 // main Div my app
   var contener = document.getElementById("myDiv");
-  contener.appendChild(header);
-
   var newBtn = document.createElement("button");
-  var textNodeBtn = document.createTextNode("New element");
+  var textNodeBtn = document.createTextNode("Add element");
   newBtn.appendChild(textNodeBtn);
-
   newBtn.style.width = "100px";
+  newBtn.setAttribute("id","myBtn");
   contener.appendChild(newBtn);
+
+
+  var input = document.createElement("input");
+  input.setAttribute("id","inputValue");
+  contener.appendChild(input);
+
 
 
   console.log(contener.nodeParent); // return undefined
@@ -41,36 +40,39 @@
   let newElement = () =>{
    // handle to ul list
    var myList = document.getElementById("myList");
-
    // new li element
    var listElement = document.createElement("li");
    var att = document.createAttribute("class");
    att.value = "myClass";
    listElement.setAttributeNode(att);
-
-
    // create close button and assign attributes to him
    var closeBtn = document.createElement("button");
    var att = document.createAttribute("class");
    // class our closse button
    att.value = "closeBtn";
    closeBtn.setAttributeNode(att);
-
    var closeBtnTextNode = document.createTextNode("X");
    closeBtn.appendChild(closeBtnTextNode);
-
    var editBtn = document.createElement("button");
    var att = document.createAttribute("class");
    att.value = "editBtn";
    editBtn.setAttributeNode(att);
    var editBtnTextNode = document.createTextNode("EDIT");
    editBtn.appendChild(editBtnTextNode);
-
-
    // delete li after click
    //  text will be added to our Li element
-   var newTask = prompt("Enter new task...");
-   var nodeListElement = document.createTextNode(newTask);
+   let userValue = input.value;
+   if(validateInput(userValue)){
+   var nodeListElement = document.createTextNode(userValue);
+
+   let input = document.getElementById("inputValue");
+   input.value = "";
+
+ }else{
+   console.log("attempt to insert null value !");
+ }
+
+
    listElement.appendChild(nodeListElement);
    listElement.appendChild(closeBtn);
     listElement.appendChild(editBtn);
@@ -78,25 +80,34 @@
 
    closeBtn.addEventListener('click', function(){
    listElement.remove();
-
    });
-
   editBtn.addEventListener('click', function(){
   var newTask = prompt("Edit task...");
   listElement.firstChild.nodeValue = "";
   var nodeListElement = document.createTextNode(newTask);
   listElement.appendChild(nodeListElement);
    });
-
-
-
+   // add element Li after button click
   };
-
-  // add element Li after button click
-
    newBtn.addEventListener("click", function(){newElement();});
-
    contener.appendChild(myList);
+
+   // null
+
+
+
+
+   const validateInput = userInput =>{
+     if(userInput == "")
+     {
+     alert("Insert value !");
+     return false;
+     }
+      else{
+           return true;
+          }
+   };
+
   </script>
 
 
