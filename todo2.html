@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ToDo List</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/script.js"></script>
+
+</head>
+<body>
+<div id="main">
+  <div id="header">
+ <h2> My shopping list</h2>
+  </div>
+ <div id="myDiv">
+  <ul id="myList"></ul>
+ </div>
+<div id="bottom">
+</div>
+</div>
+
+<script>
+  // Our header will be generater from JavaScript !
+// main Div my app
+  var contener = document.getElementById("myDiv");
+  var bottom = document.getElementById("bottom");
+  var newBtn = document.createElement("button");
+  var textNodeBtn = document.createTextNode("Add element");
+  newBtn.appendChild(textNodeBtn);
+  newBtn.style.width = "100px";
+  newBtn.setAttribute("id","myBtn");
+  bottom.appendChild(newBtn);
+  var input = document.createElement("input");
+  input.setAttribute("id","inputValue");
+  bottom.appendChild(input);
+  console.log(contener.nodeParent); // return undefined
+  console.log(contener.nodeValue); // return null
+  let newElement = () =>{
+   // handle to ul list
+   var myList = document.getElementById("myList");
+   // new li element
+   var listElement = document.createElement("li");
+   var att = document.createAttribute("class");
+   att.value = "myClass";
+   listElement.setAttributeNode(att);
+   // create close button and assign attributes to him
+   var closeBtn = document.createElement("button");
+   var att = document.createAttribute("class");
+   // class our closse button
+   att.value = "closeBtn";
+   closeBtn.setAttributeNode(att);
+   var closeBtnTextNode = document.createTextNode("X");
+   closeBtn.appendChild(closeBtnTextNode);
+   var editBtn = document.createElement("button");
+   var att = document.createAttribute("class");
+   att.value = "editBtn";
+   editBtn.setAttributeNode(att);
+   var editBtnTextNode = document.createTextNode("EDIT");
+   editBtn.appendChild(editBtnTextNode);
+   // delete li after click
+   //  text will be added to our Li element
+   let userValue = input.value;
+   if(validateInput(userValue)){
+   var nodeListElement = document.createTextNode(userValue);
+   let input = document.getElementById("inputValue");
+   input.value = "";
+ }else{
+   console.log("attempt to insert null value !");
+ }
+   listElement.appendChild(nodeListElement);
+   listElement.appendChild(closeBtn);
+    listElement.appendChild(editBtn);
+   myList.appendChild(listElement);
+   closeBtn.addEventListener('click', function(){
+   listElement.remove();
+   });
+  editBtn.addEventListener('click', function(){
+  var newTask = prompt("Edit task...");
+  listElement.firstChild.nodeValue = "";
+  var nodeListElement = document.createTextNode(newTask);
+  listElement.appendChild(nodeListElement);
+   });
+   // add element Li after button click
+  };
+   newBtn.addEventListener("click", function(){newElement();});
+   contener.appendChild(myList);
+   // null
+   const validateInput = userInput =>{
+     if(userInput == "")
+     {
+     alert("Insert value !");
+     return false;
+     }
+      else{
+           return true;
+          }
+   };
+  </script>
+
+
+
+
+</body>
+</html>
